@@ -10,7 +10,7 @@ class UserProtoSerializer(p_serializer.ModelProtoSerializer):
     """
     def get_password(self, obj):
         """
-        Hash entered password
+        Hash entered password and then save in Database
         """
         return make_password(obj.password)
 
