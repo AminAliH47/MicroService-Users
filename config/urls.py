@@ -23,4 +23,7 @@ urlpatterns = [
 
 
 def grpc_handlers(server):
+    """
+    Configuration gRPC handler hook for run server
+    """
     user_grpc_handlers(server)
