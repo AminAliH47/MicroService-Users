@@ -32,7 +32,9 @@ class UserService(Service):
         try:
             return User.objects.get(pk=pk)
         except User.DoesNotExist:
-            self.context.abort(grpc.StatusCode.NOT_FOUND, f'User with id {pk} was not found!')
+            self.context.abort(
+                grpc.StatusCode.NOT_FOUND, f"User with id {pk} was not found!"
+            )
 
     def Retrieve(self, request, context):
         """

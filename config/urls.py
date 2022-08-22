@@ -18,7 +18,7 @@ from django.urls import path
 from user.handlers import grpc_handlers as user_grpc_handlers
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path("admin/", admin.site.urls),
 ]
 
 
