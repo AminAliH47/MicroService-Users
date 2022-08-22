@@ -1,4 +1,4 @@
-from django_grpc_framework.test import RPCTestCase, FakeRpcError
+from django_grpc_framework.test import RPCTestCase
 from user.models import User
 from user_proto import user_pb2_grpc
 from user_proto import user_pb2

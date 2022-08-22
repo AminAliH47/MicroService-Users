@@ -5,4 +5,5 @@ class User(AbstractUser):
     """
     Custom user model
     """
+
     pass

@@ -8,9 +8,10 @@ class UserProtoSerializer(p_serializer.ModelProtoSerializer):
     """
     Create proto serializer for User model
     """
+
     def get_password(self, obj):
         """
-        Hash entered password and then save in Database
+        Hash entered password and then save it in Database
         """
         return make_password(obj.password)
 
@@ -18,7 +19,10 @@ class UserProtoSerializer(p_serializer.ModelProtoSerializer):
         model = User
         proto_class = user_pb2.User
         fields = (
-            'id', 'username',
-            'first_name', 'last_name',
-            'email', 'password',
+            "id",
+            "username",
+            "first_name",
+            "last_name",
+            "email",
+            "password",
         )

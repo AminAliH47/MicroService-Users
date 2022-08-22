@@ -281,6 +281,6 @@ fabric.properties
 .idea/**/azureSettings.xml
 
 # Ignore compiled proto files
-user_proto/
+/user_proto
 
 # End of https://www.toptal.com/developers/gitignore/api/django,pycharm
