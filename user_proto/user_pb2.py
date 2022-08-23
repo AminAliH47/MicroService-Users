@@ -15,13 +15,15 @@ _sym_db = _symbol_database.Default()
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x15user_proto/user.proto\x12\nuser_proto\x1a\x1bgoogle/protobuf/empty.proto\"l\n\x04User\x12\n\n\x02id\x18\x01 \x01(\x03\x12\x10\n\x08username\x18\x02 \x01(\t\x12\x12\n\nfirst_name\x18\x03 \x01(\t\x12\x11\n\tlast_name\x18\x04 \x01(\t\x12\r\n\x05\x65mail\x18\x05 \x01(\t\x12\x10\n\x08password\x18\x06 \x01(\t\"\x11\n\x0fUserListRequest\"!\n\x13UserRetrieveRequest\x12\n\n\x02id\x18\x01 \x01(\x03\x32\xa2\x02\n\x0eUserController\x12\x39\n\x04List\x12\x1b.user_proto.UserListRequest\x1a\x10.user_proto.User\"\x00\x30\x01\x12.\n\x06\x43reate\x12\x10.user_proto.User\x1a\x10.user_proto.User\"\x00\x12?\n\x08Retrieve\x12\x1f.user_proto.UserRetrieveRequest\x1a\x10.user_proto.User\"\x00\x12.\n\x06Update\x12\x10.user_proto.User\x1a\x10.user_proto.User\"\x00\x12\x34\n\x06\x44\x65lete\x12\x10.user_proto.User\x1a\x16.google.protobuf.Empty\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x15user_proto/user.proto\x12\nuser_proto\x1a\x1bgoogle/protobuf/empty.proto\"\x99\x01\n\x04User\x12\n\n\x02id\x18\x01 \x01(\x03\x12\x10\n\x08username\x18\x02 \x01(\t\x12\x12\n\nfirst_name\x18\x03 \x01(\t\x12\x11\n\tlast_name\x18\x04 \x01(\t\x12\r\n\x05\x65mail\x18\x05 \x01(\t\x12\x10\n\x08password\x18\x06 \x01(\t\x12\x18\n\x10is_authenticated\x18\x07 \x01(\x08\x12\x11\n\tis_active\x18\x08 \x01(\x08\"\x11\n\x0fUserListRequest\"!\n\x13UserRetrieveRequest\x12\n\n\x02id\x18\x01 \x01(\x03\"\x18\n\nUserExists\x12\n\n\x02id\x18\x01 \x01(\x03\"/\n\tUserLogin\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t2\x92\x03\n\x0eUserController\x12\x39\n\x04List\x12\x1b.user_proto.UserListRequest\x1a\x10.user_proto.User\"\x00\x30\x01\x12.\n\x06\x43reate\x12\x10.user_proto.User\x1a\x10.user_proto.User\"\x00\x12?\n\x08Retrieve\x12\x1f.user_proto.UserRetrieveRequest\x1a\x10.user_proto.User\"\x00\x12.\n\x06Update\x12\x10.user_proto.User\x1a\x10.user_proto.User\"\x00\x12\x34\n\x06\x44\x65lete\x12\x10.user_proto.User\x1a\x16.google.protobuf.Empty\"\x00\x12\x32\n\x05Login\x12\x15.user_proto.UserLogin\x1a\x10.user_proto.User\"\x00\x12:\n\x0cIsUserExists\x12\x16.user_proto.UserExists\x1a\x10.user_proto.User\"\x00\x62\x06proto3')
 
 
 
 _USER = DESCRIPTOR.message_types_by_name['User']
 _USERLISTREQUEST = DESCRIPTOR.message_types_by_name['UserListRequest']
 _USERRETRIEVEREQUEST = DESCRIPTOR.message_types_by_name['UserRetrieveRequest']
+_USEREXISTS = DESCRIPTOR.message_types_by_name['UserExists']
+_USERLOGIN = DESCRIPTOR.message_types_by_name['UserLogin']
 User = _reflection.GeneratedProtocolMessageType('User', (_message.Message,), {
   'DESCRIPTOR' : _USER,
   '__module__' : 'user_proto.user_pb2'
@@ -43,16 +45,34 @@ UserRetrieveRequest = _reflection.GeneratedProtocolMessageType('UserRetrieveRequ
   })
 _sym_db.RegisterMessage(UserRetrieveRequest)
 
+UserExists = _reflection.GeneratedProtocolMessageType('UserExists', (_message.Message,), {
+  'DESCRIPTOR' : _USEREXISTS,
+  '__module__' : 'user_proto.user_pb2'
+  # @@protoc_insertion_point(class_scope:user_proto.UserExists)
+  })
+_sym_db.RegisterMessage(UserExists)
+
+UserLogin = _reflection.GeneratedProtocolMessageType('UserLogin', (_message.Message,), {
+  'DESCRIPTOR' : _USERLOGIN,
+  '__module__' : 'user_proto.user_pb2'
+  # @@protoc_insertion_point(class_scope:user_proto.UserLogin)
+  })
+_sym_db.RegisterMessage(UserLogin)
+
 _USERCONTROLLER = DESCRIPTOR.services_by_name['UserController']
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _USER._serialized_start=66
-  _USER._serialized_end=174
-  _USERLISTREQUEST._serialized_start=176
-  _USERLISTREQUEST._serialized_end=193
-  _USERRETRIEVEREQUEST._serialized_start=195
-  _USERRETRIEVEREQUEST._serialized_end=228
-  _USERCONTROLLER._serialized_start=231
-  _USERCONTROLLER._serialized_end=521
+  _USER._serialized_start=67
+  _USER._serialized_end=220
+  _USERLISTREQUEST._serialized_start=222
+  _USERLISTREQUEST._serialized_end=239
+  _USERRETRIEVEREQUEST._serialized_start=241
+  _USERRETRIEVEREQUEST._serialized_end=274
+  _USEREXISTS._serialized_start=276
+  _USEREXISTS._serialized_end=300
+  _USERLOGIN._serialized_start=302
+  _USERLOGIN._serialized_end=349
+  _USERCONTROLLER._serialized_start=352
+  _USERCONTROLLER._serialized_end=754
 # @@protoc_insertion_point(module_scope)

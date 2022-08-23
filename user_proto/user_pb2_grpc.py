@@ -40,6 +40,16 @@ class UserControllerStub(object):
                 request_serializer=user__proto_dot_user__pb2.User.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 )
+        self.Login = channel.unary_unary(
+                '/user_proto.UserController/Login',
+                request_serializer=user__proto_dot_user__pb2.UserLogin.SerializeToString,
+                response_deserializer=user__proto_dot_user__pb2.User.FromString,
+                )
+        self.IsUserExists = channel.unary_unary(
+                '/user_proto.UserController/IsUserExists',
+                request_serializer=user__proto_dot_user__pb2.UserExists.SerializeToString,
+                response_deserializer=user__proto_dot_user__pb2.User.FromString,
+                )
 
 
 class UserControllerServicer(object):
@@ -75,6 +85,18 @@ class UserControllerServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def Login(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def IsUserExists(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_UserControllerServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -103,6 +125,17 @@ def add_UserControllerServicer_to_server(servicer, server):
                     request_deserializer=user__proto_dot_user__pb2.User.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
+            'Login': grpc.unary_unary_rpc_method_handler(
+                    servicer.Login,
+                    request_deserializer=user__proto_dot_user__pb2.UserLogin.FromString,
+                    response_serializer=user__proto_dot_user__pb2.User.SerializeToString,
+            ),
+            'IsUserExists': grpc.unary_unary_rpc_method_handler(
+                    servicer.IsUserExists,
+                    request_deserializer=user__proto_dot_user__pb2.UserExists.FromString,
+                    response_serializer=user__proto_dot_user__pb2.User.SerializeToString,
+            ),
+
     }
     generic_handler = grpc.method_handlers_generic_handler(
             'user_proto.UserController', rpc_method_handlers)
@@ -195,5 +228,39 @@ class UserController(object):
         return grpc.experimental.unary_unary(request, target, '/user_proto.UserController/Delete',
             user__proto_dot_user__pb2.User.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def Login(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/user_proto.UserController/Login',
+            user__proto_dot_user__pb2.UserLogin.SerializeToString,
+            user__proto_dot_user__pb2.User.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def IsUserExists(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/user_proto.UserController/IsUserExists',
+            user__proto_dot_user__pb2.UserExists.SerializeToString,
+            user__proto_dot_user__pb2.User.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

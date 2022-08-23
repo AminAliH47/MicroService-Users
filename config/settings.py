@@ -127,3 +127,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # gRPC Section
 GRPC_FRAMEWORK = {}
+
+# Authentication backends
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+)
