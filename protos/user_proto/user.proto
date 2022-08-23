@@ -10,6 +10,8 @@ service UserController {
   rpc Retrieve(UserRetrieveRequest) returns (User) {}
   rpc Update(User) returns (User) {}
   rpc Delete(User) returns (google.protobuf.Empty) {}
+  rpc Login(UserLogin) returns (User) {}
+  rpc IsUserExists(UserExists) returns (User) {}
 }
 
 message User {
@@ -19,11 +21,22 @@ message User {
   string last_name = 4;
   string email = 5;
   string password = 6;
+  bool is_authenticated = 7;
+  bool is_active = 8 ;
 }
 
 message UserListRequest {
 }
 
 message UserRetrieveRequest {
-    int64 id = 1;
+  int64 id = 1;
+}
+
+message UserExists {
+  int64 id = 1;
+}
+
+message UserLogin {
+  string username = 1;
+  string password = 2;
 }

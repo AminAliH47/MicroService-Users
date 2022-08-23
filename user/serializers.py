@@ -1,19 +1,13 @@
-from django.contrib.auth.hashers import make_password
 from django_grpc_framework import proto_serializers as p_serializer
 from user.models import User
 from user_proto import user_pb2
+from rest_framework import serializers
 
 
 class UserProtoSerializer(p_serializer.ModelProtoSerializer):
     """
     Create proto serializer for User model
     """
-
-    def get_password(self, obj):
-        """
-        Hash entered password and then save it in Database
-        """
-        return make_password(obj.password)
 
     class Meta:
         model = User
@@ -25,4 +19,70 @@ class UserProtoSerializer(p_serializer.ModelProtoSerializer):
             "last_name",
             "email",
             "password",
+            "is_authenticated",
+            "is_active",
         )
+
+
+class IsUserExistsSerializer(p_serializer.ProtoSerializer):
+    """
+    Serialize user id and checks user exists or not
+    """
+    id = serializers.IntegerField(required=True)
+
+    def is_valid(self, raise_exception=False):
+        super(IsUserExistsSerializer, self).is_valid()
+
+        pk = self.message.id
+
+        try:
+            user = User.objects.get(id=pk)
+        except User.DoesNotExist:
+            raise serializers.ValidationError("User does not exists", code=404)
+
+        self.message.id = user.id
+        self.message.username = user.username
+        self.message.first_name = user.first_name
+        self.message.last_name = user.last_name
+        self.message.email = user.email
+        self.message.password = user.password
+        self.message.is_authenticated = user.is_authenticated
+
+    class Meta:
+        proto_class = user_pb2.User
+
+
+class UserLoginSerializer(p_serializer.ProtoSerializer):
+    """
+    Serialize user username and password
+    and checks is user exists for login
+    """
+    username = serializers.CharField(required=True)
+    password = serializers.CharField(required=True)
+
+    def is_valid(self, raise_exception=False):
+        super(UserLoginSerializer, self).is_valid()
+
+        username = self.message.username
+        password = self.message.password
+
+        try:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            raise serializers.ValidationError("No user found with this information.", code=404)
+
+        is_correct = user.check_password(password)
+        print(is_correct)
+        if not is_correct:
+            raise serializers.ValidationError("User Password is incorrect!", code=403)
+
+        self.message.id = user.id
+        self.message.username = user.username
+        self.message.first_name = user.first_name
+        self.message.last_name = user.last_name
+        self.message.email = user.email
+        self.message.password = user.password
+        self.message.is_authenticated = user.is_authenticated
+
+    class Meta:
+        proto_class = user_pb2.User

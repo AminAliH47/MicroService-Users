@@ -2,7 +2,11 @@ import grpc
 from google.protobuf import empty_pb2
 from django_grpc_framework.services import Service
 from user.models import User
-from user.serializers import UserProtoSerializer
+from user.serializers import (
+    UserProtoSerializer,
+    UserLoginSerializer,
+    IsUserExistsSerializer,
+)
 
 
 class UserService(Service):
@@ -22,6 +26,7 @@ class UserService(Service):
         serializer = UserProtoSerializer(message=request)
         serializer.is_valid(raise_exception=True)
         serializer.save()
+
         return serializer.message
 
     def get_object(self, pk):
@@ -42,6 +47,7 @@ class UserService(Service):
         """
         user = self.get_object(request.id)
         serializer = UserProtoSerializer(user)
+
         return serializer.message
 
     def Update(self, request, context):
@@ -52,6 +58,7 @@ class UserService(Service):
         serializer = UserProtoSerializer(user, message=request)
         serializer.is_valid(raise_exception=True)
         serializer.save()
+
         return serializer.message
 
     def Delete(self, request, context):
@@ -60,4 +67,28 @@ class UserService(Service):
         """
         user = self.get_object(request.id)
         user.delete()
+
         return empty_pb2.Empty()
+
+    def IsUserExists(self, request, context):
+        """
+        checks user exists or not
+
+        :returns: User object
+        """
+        serializer = IsUserExistsSerializer(message=request)
+        serializer.is_valid(raise_exception=True)
+
+        return serializer.message
+
+    def Login(self, request, context):
+        """
+        if user is valid return user object to Signin and authentication
+        in Gateway Service
+
+        :returns: User object
+        """
+        serializer = UserLoginSerializer(message=request)
+        serializer.is_valid(raise_exception=True)
+
+        return serializer.message
