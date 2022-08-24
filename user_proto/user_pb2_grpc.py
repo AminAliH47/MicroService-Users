@@ -135,6 +135,7 @@ def add_UserControllerServicer_to_server(servicer, server):
                     request_deserializer=user__proto_dot_user__pb2.UserExists.FromString,
                     response_serializer=user__proto_dot_user__pb2.User.SerializeToString,
             ),
+
     }
     generic_handler = grpc.method_handlers_generic_handler(
             'user_proto.UserController', rpc_method_handlers)
