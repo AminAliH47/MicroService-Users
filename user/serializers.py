@@ -1,4 +1,5 @@
 from django_grpc_framework import proto_serializers as p_serializer
+from common.auth import authenticate
 from user.models import User
 from user_proto import user_pb2
 from rest_framework import serializers
@@ -66,15 +67,7 @@ class UserLoginSerializer(p_serializer.ProtoSerializer):
         username = self.message.username
         password = self.message.password
 
-        try:
-            user = User.objects.get(username=username)
-        except User.DoesNotExist:
-            raise serializers.ValidationError("No user found with this information.", code=404)
-
-        is_correct = user.check_password(password)
-        print(is_correct)
-        if not is_correct:
-            raise serializers.ValidationError("User Password is incorrect!", code=403)
+        user = authenticate(username, password)
 
         self.message.id = user.id
         self.message.username = user.username

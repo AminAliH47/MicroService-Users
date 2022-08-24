@@ -26,7 +26,6 @@ class UserService(Service):
         serializer = UserProtoSerializer(message=request)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-
         return serializer.message
 
     def get_object(self, pk):
