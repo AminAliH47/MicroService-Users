@@ -40,7 +40,6 @@ class TestUserServices(RPCTestCase):
         self.assertEqual(response.first_name, "test first")
         self.assertEqual(response.last_name, "test last")
         self.assertEqual(response.email, "test@test.com")
-        self.assertEqual(response.password, "Test12345")
         self.assertEqual(User.objects.count(), 3)
 
     def test_user_lists(self):
@@ -70,7 +69,6 @@ class TestUserServices(RPCTestCase):
         self.assertEqual(response.first_name, "test first")
         self.assertEqual(response.last_name, "test last")
         self.assertEqual(response.email, "test@test.com")
-        self.assertEqual(response.password, "Test12345")
 
     def test_delete_user(self):
         """

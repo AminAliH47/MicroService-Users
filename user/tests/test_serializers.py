@@ -1,9 +1,9 @@
 from django.test import TestCase
-
 from user.serializers import UserProtoSerializer
 
 
 class TestSerializers(TestCase):
+
     def test_user_serializer_valid_data(self):
         """
         Test User Proto Serializer data is valid
