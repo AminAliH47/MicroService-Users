@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+  users:
+    build: .
+    container_name: users
+    restart: always
+    volumes:
+      - type: bind
+        source: .
+        target: /home/myuser/users
+    ports:
+      - "5000:5000"
+    environment:
+      - SECRET_KEY= django-insecure-n=zajj*b0hkno(qz8k&e*n%2t&7*7&c$$c-a$a+0kjfrwba-$$^p
+      - DEBUG=True
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    depends_on:
+      - db
+    networks:
+      - users_network
+
+  db:
+    image: postgres:latest
+    container_name: db
+    restart: always
+    volumes:
+      - type: bind
+        source: ./dbdata
+        target: /var/lib/postgresql/data
+    environment:
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    networks:
+      - users_network
+
+networks:
+  users_network:
+    name: users_network
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
+          gateway: 10.5.0.1
