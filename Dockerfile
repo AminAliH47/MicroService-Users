@@ -7,6 +7,7 @@ ENV USER myuser
 # Upgrade pip before create non-root user
 RUN python -m pip install --upgrade pip
 
+# Create non-root user
 RUN adduser -D $USER --disabled-password
 USER $USER
 
