@@ -283,4 +283,7 @@ fabric.properties
 # Ignore compiled proto files
 /user_proto
 
+# Ignore Database file
+dbdata/
+
 # End of https://www.toptal.com/developers/gitignore/api/django,pycharm
