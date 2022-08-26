@@ -16,6 +16,7 @@ Before you run Gateway service, you should run this service to connect correctly
 
 [Gateway Service](https://github.com/AminAliH47/MicroService-Gateway)
 
+<hr>
 
 ## 🏁 Run the service
 **Users service is dockerized.** 
@@ -50,6 +51,8 @@ $ docker-compose up --build -d
 
 After you run service correctly, You should run [Gateway Service](https://github.com/AminAliH47/MicroService-Gateway) 
 to perform CRUD operation with Restfull API.
+
+<hr>
 
 ## ✅ Use the project
 Now you should run [Gateway Service](https://github.com/AminAliH47/MicroService-Gateway) to use services.
